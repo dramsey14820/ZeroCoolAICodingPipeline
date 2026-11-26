@@ -72,6 +72,7 @@ foreach ($relDir in $directoriesToCreate) {
 $filesToDeploy = @(
     @{ RelativePath = 'AGENTS.md';                                 PreserveIfExists = $false },
     @{ RelativePath = '.agents\rules\csharp-standards.md';         PreserveIfExists = $false },
+    @{ RelativePath = '.agents\rules\blazor-maui-ui.md';           PreserveIfExists = $false },
     @{ RelativePath = '.agents\skills\feature-slice\SKILL.md';     PreserveIfExists = $false },
     @{ RelativePath = '.ai\constitution.md';                       PreserveIfExists = $true  },
     @{ RelativePath = '.ai\slices\slice-template.md';              PreserveIfExists = $false }
