@@ -1,6 +1,7 @@
 # Slice XX: <Concise Feature Slice Title>
 
 - **Status**: `Draft` | `Ready` | `In Progress` | `In Review` | `Done`
+- **Risk**: `High` | `Low` *(High = auth, SQL/data, new `I*Service` contracts, MAUI/WiX host, external HTTP, or Stage 5 escalation -> requires Stage 6 Pass-2 Gemini audit; Low = CSS/UI tweaks or established CRUD -> Pass-1 local review sufficient)*
 - **Owner / Stage**: Stage 2 (Gemini Mini-Spec) -> Stages 3–5 (Local Ollama) -> Stage 6 (Two-Tier Review)
 
 ---

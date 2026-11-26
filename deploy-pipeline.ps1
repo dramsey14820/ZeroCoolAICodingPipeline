@@ -48,6 +48,7 @@ $resolvedTarget = (Resolve-Path -Path $TargetRepoPath).Path
 $directoriesToCreate = @(
     '.agents\rules',
     '.agents\skills\feature-slice',
+    '.agents\skills\pipeline-guide',
     '.ai\slices'
 )
 
@@ -71,10 +72,14 @@ foreach ($relDir in $directoriesToCreate) {
 # 2. Define exact template files to deploy (never touches existing slice-01.md+ files)
 $filesToDeploy = @(
     @{ RelativePath = 'AGENTS.md';                                 PreserveIfExists = $false },
+    @{ RelativePath = 'Directory.Build.props';                     PreserveIfExists = $true  },
     @{ RelativePath = '.agents\rules\csharp-standards.md';         PreserveIfExists = $false },
     @{ RelativePath = '.agents\rules\blazor-maui-ui.md';           PreserveIfExists = $false },
     @{ RelativePath = '.agents\skills\feature-slice\SKILL.md';     PreserveIfExists = $false },
+    @{ RelativePath = '.agents\skills\pipeline-guide\SKILL.md';    PreserveIfExists = $false },
     @{ RelativePath = '.ai\constitution.md';                       PreserveIfExists = $true  },
+    @{ RelativePath = '.ai\run-stage.ps1';                         PreserveIfExists = $false },
+    @{ RelativePath = '.ai\update-repo-map.ps1';                   PreserveIfExists = $false },
     @{ RelativePath = '.ai\slices\slice-template.md';              PreserveIfExists = $false }
 )
 
