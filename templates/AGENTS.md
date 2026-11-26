@@ -65,8 +65,10 @@ To prevent VRAM spillover and context degradation on the RTX 4060 (8 GB VRAM), *
 ## Supporting Pipeline Files
 
 - **Project Rulebook**: `.ai/constitution.md`
-- **Deterministic Build Analyzers**: `Directory.Build.props`
+- **Deterministic Build Analyzers**: `Directory.Build.props` & `.editorconfig`
 - **Compact Repo Signature Index**: `.ai/repo-map.md` *(regenerated via `.ai/update-repo-map.ps1`)*
+- **Golden Slice Reference**: `.ai/golden-slice-example.md` *(pass `-IncludeGoldenExample` on early slices)*
+- **Stage 5 Verification Helper**: `.ai/verify-slice.ps1` *(runs build/tests & writes concise `.ai/last-error.txt`)*
 - **C# / .NET Standards**: `.agents/rules/csharp-standards.md`
 - **Blazor & MAUI UI Standards**: `.agents/rules/blazor-maui-ui.md`
 - **Interactive Stage Guide**: `.agents/skills/pipeline-guide/SKILL.md` *(ask "Guide me through the next stage" to auto-detect and walk through Stages 1–6)*

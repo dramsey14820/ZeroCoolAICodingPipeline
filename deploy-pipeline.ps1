@@ -73,12 +73,15 @@ foreach ($relDir in $directoriesToCreate) {
 $filesToDeploy = @(
     @{ RelativePath = 'AGENTS.md';                                 PreserveIfExists = $false },
     @{ RelativePath = 'Directory.Build.props';                     PreserveIfExists = $true  },
+    @{ RelativePath = '.editorconfig';                             PreserveIfExists = $true  },
     @{ RelativePath = '.agents\rules\csharp-standards.md';         PreserveIfExists = $false },
     @{ RelativePath = '.agents\rules\blazor-maui-ui.md';           PreserveIfExists = $false },
     @{ RelativePath = '.agents\skills\feature-slice\SKILL.md';     PreserveIfExists = $false },
     @{ RelativePath = '.agents\skills\pipeline-guide\SKILL.md';    PreserveIfExists = $false },
     @{ RelativePath = '.ai\constitution.md';                       PreserveIfExists = $true  },
+    @{ RelativePath = '.ai\golden-slice-example.md';               PreserveIfExists = $false },
     @{ RelativePath = '.ai\run-stage.ps1';                         PreserveIfExists = $false },
+    @{ RelativePath = '.ai\verify-slice.ps1';                      PreserveIfExists = $false },
     @{ RelativePath = '.ai\update-repo-map.ps1';                   PreserveIfExists = $false },
     @{ RelativePath = '.ai\slices\slice-template.md';              PreserveIfExists = $false }
 )

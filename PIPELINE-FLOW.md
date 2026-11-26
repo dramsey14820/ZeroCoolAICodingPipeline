@@ -92,10 +92,9 @@ Implements the slice strictly adhering to `.ai/constitution.md`, `.agents/rules/
 
 ### Stage 5 — Deterministic Gate & Local Repair *(CLI + Ollama `qwen3.5:9b`)*
 ```powershell
-dotnet build -warnaserror
-dotnet test
+.\.ai\verify-slice.ps1
 ```
-If either fails, save the concise error output to `.ai\last-error.txt` and run:
+Runs `dotnet build -warnaserror` and `dotnet test` (pass `-FormatCheck` to also enforce `.editorconfig` via `dotnet format --verify-no-changes`). If either fails, it strips MSBuild noise and writes concise errors to `.ai\last-error.txt`, ready for:
 ```powershell
 .\.ai\run-stage.ps1 -Stage Fix -SlicePath .ai\slices\slice-01.md -TargetFiles src\MyApp\Program.cs -ErrorLog .ai\last-error.txt
 ```

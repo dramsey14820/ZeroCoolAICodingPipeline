@@ -69,19 +69,18 @@ Always open your response with a compact status banner:
 3. Advance immediately to Stage 5.
 
 ### Stage 5: Deterministic Build/Test & Local Repair *(Local Ollama `qwen3.5:9b`, Max 2 Retries)*
-1. Run:
+1. Run the verification helper (runs `dotnet build -warnaserror` + `dotnet test`, and captures concise errors into `.ai/last-error.txt` on failure):
    ```powershell
-   dotnet build -warnaserror
-   dotnet test
+   .\.ai\verify-slice.ps1
    ```
 2. If green, update `slice-XX.md` status to `In Review` and advance to Stage 6.
 3. If red:
-   - Save the concise compiler/test errors to `.ai/last-error.txt` and run:
+   - Run the local repair step using the auto-captured `.ai/last-error.txt`:
      ```powershell
      .\.ai\run-stage.ps1 -Stage Fix -SlicePath .ai\slices\slice-XX.md -TargetFiles <failing-files> -ErrorLog .ai\last-error.txt
      ```
    - Track attempts explicitly (**Attempt 1/2**, **Attempt 2/2**).
-   - **Hard Escalation Cap**: If still red after 2 local attempts, stop local retries and escalate directly to **Gemini (High/Medium)** with the exact error log and current `git diff`.
+   - **Hard Escalation Cap**: If still red after 2 local attempts, stop local retries and escalate directly to **Gemini (High/Medium)** with `.ai/last-error.txt` and current `git diff`.
 
 ### Stage 6: Two-Tier Quality Gate & Commit *(CLI -> `qwen3.5:9b` -> Gemini)*
 1. Check off completed subtasks in `.ai/slices/slice-XX.md` and stage all slice files:

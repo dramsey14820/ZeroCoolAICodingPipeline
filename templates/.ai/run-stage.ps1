@@ -43,6 +43,9 @@ param(
     [switch]$IncludeUiRules,
 
     [Parameter(Mandatory = $false)]
+    [switch]$IncludeGoldenExample,
+
+    [Parameter(Mandatory = $false)]
     [string]$OllamaUrl = 'http://localhost:11434',
 
     [Parameter(Mandatory = $false)]
@@ -89,6 +92,15 @@ if ($IncludeUiRules) {
         $sections.Add("## Blazor & MAUI UI Rules (.agents/rules/blazor-maui-ui.md)`n" + (Get-Content -Path $uiRulesPath -Raw))
     } else {
         Write-Warning "UI rules file not found at '$uiRulesPath'; continuing without it."
+    }
+}
+
+if ($IncludeGoldenExample) {
+    $goldenPath = '.ai\golden-slice-example.md'
+    if (Test-Path -Path $goldenPath -PathType Leaf) {
+        $sections.Add("## Golden Slice Reference (.ai/golden-slice-example.md)`n" + (Get-Content -Path $goldenPath -Raw))
+    } else {
+        Write-Warning "Golden slice example not found at '$goldenPath'; continuing without it."
     }
 }
 

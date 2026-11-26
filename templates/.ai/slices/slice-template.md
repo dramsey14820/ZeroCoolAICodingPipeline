@@ -25,6 +25,9 @@
 
 ## 2. Data Contracts / Interfaces / SQL Schema
 
+### Required Namespaces & Packages
+- `using ...;` *(list any non-obvious .NET 10 / bUnit / Dapper / EF Core namespaces so local Ollama avoids guessing)*
+
 ### DTOs & Contracts
 ```csharp
 namespace <Project>.Features.<Feature>.<Action>;
