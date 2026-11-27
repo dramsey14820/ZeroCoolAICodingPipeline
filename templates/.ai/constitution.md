@@ -6,7 +6,7 @@
 - **.NET**: .NET 10+ (LTS only), C# (`<Nullable>enable</Nullable>`, `-warnaserror`).
 - **UI**: Shared RCL (`*.Shared.UI`) hosted by **Blazor Server** (`*.Web`) and **.NET MAUI Blazor Hybrid** (`*.Maui` for Windows + Android). No XAML feature screens.
 - **Styling**: Pure **CSS Grid** & **CSS Flexbox** with `.razor.css` isolation, mobile-first. No Bootstrap/Tailwind unless requested.
-- **Desktop**: Unpackaged Windows build (`WindowsPackageType=None`) for **WiX** MSI; no MSIX-only APIs; write user data to AppData.
+- **Desktop**: Unpackaged Windows build (`WindowsPackageType=None`) for **WiX v7** MSI (`.agents/rules/wix-maui-packaging.md`); no MSIX-only APIs; write WebView2 & user data to AppData.
 - **Data & Tests**: SQL Server (Dapper parameterized SQL or EF Core `AsNoTracking()`). xUnit + FluentAssertions + NSubstitute (+ bUnit).
 
 ## Hard Constraints

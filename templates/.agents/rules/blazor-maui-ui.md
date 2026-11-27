@@ -32,9 +32,10 @@ Load this rule file whenever a vertical slice creates or modifies UI components,
 ## 3. Windows Desktop (WiX MSI) & Android Guardrails
 
 - **WiX-Compatible Unpackaged Windows Build**:
-  - Configure the MAUI project for unpackaged Windows deployment (`<WindowsPackageType>None</WindowsPackageType>`) so output can be harvested cleanly into a **WiX Toolset** MSI installer.
+  - Configure the MAUI project for unpackaged Windows deployment (`<WindowsPackageType>None</WindowsPackageType>`) so output can be harvested cleanly into a **WiX Toolset v7** MSI installer.
   - **Never** call MSIX-only APIs (e.g., `Windows.ApplicationModel.Package.Current`, `ApplicationData.Current`).
-  - **Never** write logs, databases, or user settings into the installation directory (`Program Files`). Always use `Environment.SpecialFolder.LocalApplicationData` or `CommonApplicationData`.
+  - **Never** write logs, databases, WebView2 profiles, or user settings into the installation directory (`Program Files`). Always use `Environment.SpecialFolder.LocalApplicationData` or `CommonApplicationData`.
+  - For full WiX v7 `.wixproj`, `Package.wxs`, and per-machine runtime setup instructions, follow `.agents/rules/wix-maui-packaging.md`.
 - **Android Compatibility**:
   - Avoid Windows-only file path assumptions (use `Path.Combine`), and wrap any platform-specific capability (file picker, camera, notifications) behind a shared interface in `*.Shared.UI` with per-host implementations.
 

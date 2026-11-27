@@ -76,6 +76,7 @@ $filesToDeploy = @(
     @{ RelativePath = '.editorconfig';                             PreserveIfExists = $true  },
     @{ RelativePath = '.agents\rules\csharp-standards.md';         PreserveIfExists = $false },
     @{ RelativePath = '.agents\rules\blazor-maui-ui.md';           PreserveIfExists = $false },
+    @{ RelativePath = '.agents\rules\wix-maui-packaging.md';       PreserveIfExists = $false },
     @{ RelativePath = '.agents\skills\feature-slice\SKILL.md';     PreserveIfExists = $false },
     @{ RelativePath = '.agents\skills\pipeline-guide\SKILL.md';    PreserveIfExists = $false },
     @{ RelativePath = '.ai\constitution.md';                       PreserveIfExists = $true  },

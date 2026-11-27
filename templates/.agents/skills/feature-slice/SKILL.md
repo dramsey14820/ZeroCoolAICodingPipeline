@@ -17,7 +17,7 @@ Follow this exact 5-step workflow to implement **one** vertical slice at a time.
 
 ## Step 1: Load Minimal Context & Verify Scope
 
-1. Read `.ai/constitution.md` and `.agents/rules/csharp-standards.md`.
+1. Read `.ai/constitution.md` and `.agents/rules/csharp-standards.md` (plus `.agents/rules/blazor-maui-ui.md` for UI/host slices and `.agents/rules/wix-maui-packaging.md` for WiX installer / Windows desktop packaging slices).
 2. Read the active slice file: `.ai/slices/slice-XX.md`.
 3. Confirm the target files, interfaces/contracts, SQL schema, and Gherkin scenarios are unambiguous.
    - If contracts or acceptance criteria are missing or contradictory, **stop and escalate to Gemini (Stage 2)** to refine the slice spec before writing code.

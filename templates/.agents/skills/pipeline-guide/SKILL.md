@@ -48,6 +48,7 @@ Always open your response with a compact status banner:
 1. Read `.ai/repo-map.md` (if present) instead of scanning the full repository to check existing interfaces, Razor routes, and SQL tables.
 2. Propose a numbered vertical-slice roadmap (short bullet list).
    - For a **brand-new application**, always make **`slice-01.md`** the **Walking Skeleton** (`.NET 10+` LTS solution with `*.Shared.UI`, `*.Web`, `*.Maui` with `WindowsPackageType=None`, `*.Tests`, explicit `Program.Main`, base CSS Grid/Flexbox shell, and one passing smoke/bUnit test).
+   - For slices configuring the Windows desktop **WiX v7** MSI installer or per-machine `Program Files` runtime paths (`Installer.wixproj`, `Package.wxs`, `MainPage.xaml.cs`, `MauiProgram.cs`), follow `.agents/rules/wix-maui-packaging.md` and mark `Risk: High`.
 3. Once the roadmap is approved, create `.ai/slices/slice-XX.md` using `.ai/slices/slice-template.md` with exact target files, interfaces/DTOs, SQL schema, 3–6 Gherkin scenarios, subtasks, and `Risk: High | Low`. Set `Status: Ready`.
 4. **Checkpoint**: Ask the user to review `slice-XX.md` and confirm they are ready to run Stage 3 locally.
 
@@ -55,7 +56,7 @@ Always open your response with a compact status banner:
 1. Update `slice-XX.md` status to `In Progress`.
 2. Guide the user (or run the helper) to generate failing tests from the slice's Gherkin scenarios:
    ```powershell
-   .\.ai\run-stage.ps1 -Stage Tests -SlicePath .ai\slices\slice-XX.md [-IncludeUiRules]
+   .\.ai\run-stage.ps1 -Stage Tests -SlicePath .ai\slices\slice-XX.md [-IncludeUiRules] [-IncludeWixRules]
    ```
 3. Apply the generated test files and run `dotnet test` to confirm the tests fail for the expected reason (Red phase).
 4. **Checkpoint**: Confirm tests are in place and failing as expected, then advance to Stage 4.
@@ -63,9 +64,9 @@ Always open your response with a compact status banner:
 ### Stage 4: Vertical Slice Implementation *(Local Ollama `qwen2.5-coder:7b`)*
 1. Guide the user (or run the helper) with **only** the slice spec and target files (`num_ctx: 8192`):
    ```powershell
-   .\.ai\run-stage.ps1 -Stage Implement -SlicePath .ai\slices\slice-XX.md -TargetFiles <test-and-target-files> [-IncludeUiRules]
+   .\.ai\run-stage.ps1 -Stage Implement -SlicePath .ai\slices\slice-XX.md -TargetFiles <test-and-target-files> [-IncludeUiRules] [-IncludeWixRules]
    ```
-2. Apply the implementation strictly within the slice's target files, adhering to `.agents/rules/csharp-standards.md` (and `blazor-maui-ui.md` for UI slices).
+2. Apply the implementation strictly within the slice's target files, adhering to `.agents/rules/csharp-standards.md` (plus `blazor-maui-ui.md` for UI slices and `wix-maui-packaging.md` for Windows installer / desktop host slices).
 3. Advance immediately to Stage 5.
 
 ### Stage 5: Deterministic Build/Test & Local Repair *(Local Ollama `qwen3.5:9b`, Max 2 Retries)*
@@ -89,12 +90,12 @@ Always open your response with a compact status banner:
    ```
 2. **Pass-1 Local Diff Review (`qwen3.5:9b`)**:
    ```powershell
-   .\.ai\run-stage.ps1 -Stage Review -SlicePath .ai\slices\slice-XX.md [-IncludeUiRules]
+   .\.ai\run-stage.ps1 -Stage Review -SlicePath .ai\slices\slice-XX.md [-IncludeUiRules] [-IncludeWixRules]
    ```
    Fix any valid findings, re-run `dotnet build -warnaserror` + `dotnet test`, and re-stage.
 3. **Pass-2 Architectural & Security Audit *(Gemini High/Medium — Risk-Gated)***:
    - Check the slice's `Risk` field (and whether Stage 5 escalated):
-     - **`Risk: High`** *(or any Stage 5 escalation)*: **Required.** Review the filtered `git diff --staged` against `.ai/constitution.md`, `.agents/rules/csharp-standards.md`, `.agents/rules/blazor-maui-ui.md`, and `.ai/slices/slice-XX.md`. Report clear PASS / CHANGES REQUESTED findings.
+     - **`Risk: High`** *(or any Stage 5 escalation)*: **Required.** Review the filtered `git diff --staged` against `.ai/constitution.md`, `.agents/rules/csharp-standards.md`, `.agents/rules/blazor-maui-ui.md`, `.agents/rules/wix-maui-packaging.md` (when applicable), and `.ai/slices/slice-XX.md`. Report clear PASS / CHANGES REQUESTED findings.
      - **`Risk: Low`** *(CSS/layout tweaks, copy, or established CRUD with zero Stage 5 escalations)*: Pass-1 local review + green deterministic gate is sufficient (defer Gemini audit to milestone/PR level).
 4. **Completion Checkpoint**:
    - Mark `slice-XX.md` as `Status: Done`.

@@ -71,6 +71,7 @@ To prevent VRAM spillover and context degradation on the RTX 4060 (8 GB VRAM), *
 - **Stage 5 Verification Helper**: `.ai/verify-slice.ps1` *(runs build/tests & writes concise `.ai/last-error.txt`)*
 - **C# / .NET Standards**: `.agents/rules/csharp-standards.md`
 - **Blazor & MAUI UI Standards**: `.agents/rules/blazor-maui-ui.md`
+- **WiX v7 + MAUI Packaging Standards**: `.agents/rules/wix-maui-packaging.md`
 - **Interactive Stage Guide**: `.agents/skills/pipeline-guide/SKILL.md` *(ask "Guide me through the next stage" to auto-detect and walk through Stages 1–6)*
 - **Slice Execution Workflow**: `.agents/skills/feature-slice/SKILL.md`
 - **Local Ollama Stage Runner**: `.ai/run-stage.ps1` *(invokes `http://localhost:11434` with `num_ctx: 8192` for Stages 3–5 and Stage 6 Pass-1)*

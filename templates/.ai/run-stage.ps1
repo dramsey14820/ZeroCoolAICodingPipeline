@@ -43,6 +43,9 @@ param(
     [switch]$IncludeUiRules,
 
     [Parameter(Mandatory = $false)]
+    [switch]$IncludeWixRules,
+
+    [Parameter(Mandatory = $false)]
     [switch]$IncludeGoldenExample,
 
     [Parameter(Mandatory = $false)]
@@ -92,6 +95,15 @@ if ($IncludeUiRules) {
         $sections.Add("## Blazor & MAUI UI Rules (.agents/rules/blazor-maui-ui.md)`n" + (Get-Content -Path $uiRulesPath -Raw))
     } else {
         Write-Warning "UI rules file not found at '$uiRulesPath'; continuing without it."
+    }
+}
+
+if ($IncludeWixRules) {
+    $wixRulesPath = '.agents\rules\wix-maui-packaging.md'
+    if (Test-Path -Path $wixRulesPath -PathType Leaf) {
+        $sections.Add("## WiX v7 + MAUI Packaging Rules (.agents/rules/wix-maui-packaging.md)`n" + (Get-Content -Path $wixRulesPath -Raw))
+    } else {
+        Write-Warning "WiX packaging rules file not found at '$wixRulesPath'; continuing without it."
     }
 }
 
